@@ -3,7 +3,7 @@ use serde_json::{json, Value};
 
 pub enum ContentType {
     Thread,
-    Article,
+    Tweet,
 }
 
 pub async fn generate_content(
@@ -15,14 +15,19 @@ pub async fn generate_content(
         ContentType::Thread => format!(
             "You are a Web3 content writer. Based on the following article, write an engaging Twitter/X thread with 6-8 tweets. 
             Format each tweet as '1/', '2/', etc. Make it educational, punchy, and end with a strong CTA.
+            CRITICAL: DO NOT include any introductory sentences, meta-text, or 'Here's your thread' style phrases. 
+            ONLY return the thread content itself.
             
             Article content:
             {}",
             text
         ),
-        ContentType::Article => format!(
-            "You are a Web3 content writer. Based on the following content, write a clear, engaging 300-word article summary 
-            suitable for a newsletter. Use simple language, no jargon.
+        ContentType::Tweet => format!(
+            "You are a Web3 content writer. Based on the following content, write a single engaging tweet.
+            CRITICAL: The tweet must be UNDER 275 characters.
+            CRITICAL: DO NOT use any hashtags.
+            CRITICAL: DO NOT include any introductory sentences, meta-text, or 'Here's your tweet' style phrases.
+            ONLY return the tweet content itself.
             
             Content:
             {}",

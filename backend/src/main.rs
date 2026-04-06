@@ -93,7 +93,7 @@ async fn generate_handler(
         .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "GEMINI_API_KEY not set".to_string()))?;
 
     let ctype = match payload.content_type.as_deref() {
-        Some("article") => ContentType::Article,
+        Some("tweet") => ContentType::Tweet,
         _ => ContentType::Thread,
     };
 

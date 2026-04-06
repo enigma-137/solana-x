@@ -10,7 +10,7 @@ export default function Home() {
   const { send, status, txSignature, error } = useSendTx();
   const [url, setUrl] = useState('');
   const [content, setContent] = useState('');
-  const [contentType, setContentType] = useState<'thread' | 'article'>('thread');
+  const [contentType, setContentType] = useState<'thread' | 'tweet'>('thread');
 
   const handleGenerate = async () => {
     const sig = await send();
@@ -84,7 +84,7 @@ export default function Home() {
 
               <div className="flex flex-wrap items-center gap-6">
                 <div className="flex bg-black p-1 border-2 border-black">
-                  {(['thread', 'article'] as const).map((type) => (
+                  {(['thread', 'tweet'] as const).map((type) => (
                     <button
                       key={type}
                       onClick={() => setContentType(type)}
