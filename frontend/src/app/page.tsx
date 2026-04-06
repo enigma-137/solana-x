@@ -4,6 +4,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useSendTx } from '@/hooks/useSendTx';
 import { useState } from 'react';
+import Markdown from 'react-markdown';
 
 export default function Home() {
   const { publicKey, connected } = useWallet();
@@ -38,8 +39,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-black p-6 md:p-12 font-sans selection:bg-black selection:text-white">
       <div className="max-w-4xl mx-auto space-y-12">
-        
-        {/* Header */}
+
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b-4 border-black pb-8">
           <div>
             <h1 className="text-5xl font-black uppercase tracking-tighter italic">
@@ -68,8 +68,7 @@ export default function Home() {
           </section>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
-            {/* Input Side */}
+
             <div className="lg:col-span-12 space-y-8">
               <div className="bg-white border-4 border-black p-6 shadow-hard transition-transform hover:-translate-x-1 hover:-translate-y-1">
                 <label className="block text-xs font-black uppercase mb-2 tracking-widest">Target URL</label>
@@ -88,11 +87,10 @@ export default function Home() {
                     <button
                       key={type}
                       onClick={() => setContentType(type)}
-                      className={`px-6 py-2 text-sm font-black uppercase tracking-widest cursor-pointer transition-all ${
-                        contentType === type
-                          ? 'bg-white text-black'
-                          : 'bg-black text-white hover:text-gray-300'
-                      }`}
+                      className={`px-6 py-2 text-sm font-black uppercase tracking-widest cursor-pointer transition-all ${contentType === type
+                        ? 'bg-white text-black'
+                        : 'bg-black text-white hover:text-gray-300'
+                        }`}
                     >
                       {type}
                     </button>
@@ -110,7 +108,7 @@ export default function Home() {
                   {status === 'sending' && 'Approving...'}
                   {status === 'confirming' && (
                     <span className="flex items-center justify-center gap-2">
-                       Confirming...
+                      Confirming...
                     </span>
                   )}
                   {status === 'success' && 'Processing...'}
@@ -136,7 +134,7 @@ export default function Home() {
                   </div>
                   <div className="p-8 pt-10">
                     <pre className="text-sm font-medium leading-relaxed whitespace-pre-wrap font-mono break-all max-h-[500px] overflow-y-auto custom-scrollbar">
-                      {content}
+                      <Markdown>{content}</Markdown>
                     </pre>
                   </div>
                   <button
@@ -158,7 +156,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-xs font-black uppercase underline hover:no-underline underline-offset-4"
                   >
-                    View Explorer 
+                    View Explorer
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                       <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" />
                       <polyline points="15 3 21 3 21 9" />
