@@ -57,7 +57,7 @@ async fn generate_handler(
     Json(payload): Json<GenerateRequest>,
 ) -> Result<Json<GenerateResponse>, (StatusCode, String)> {
 
-    // 1. Verify the transaction
+    //Verify the transaction
     let signature = Signature::from_str(&payload.tx_signature)
         .map_err(|_| (StatusCode::BAD_REQUEST, "Invalid signature".to_string()))?;
 
@@ -81,14 +81,14 @@ async fn generate_handler(
         return Err((StatusCode::BAD_REQUEST, "Transaction failed on-chain".to_string()));
     }
 
-    // 2. Scrape the URL
+    // Scrape the URL
     let scraped = scrape_url(&payload.url)
         .await
         .map_err(|e| (StatusCode::BAD_REQUEST, e))?;
 
     println!("Scraped {} chars from {}", scraped.len(), payload.url);
 
-    // 3. Generate content with Gemini
+    //Generate content with Gemini
     let api_key = std::env::var("GEMINI_API_KEY")
         .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "GEMINI_API_KEY not set".to_string()))?;
 
